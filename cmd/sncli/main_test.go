@@ -2,17 +2,14 @@ package main
 
 import (
 	"fmt"
-	"testing"
-	"time"
-
 	"github.com/stretchr/testify/assert"
+	"testing"
 )
 
 func TestWipe(t *testing.T) {
 	msg, _, err := startCLI([]string{"sncli", "wipe", "--yes"})
 	assert.NoError(t, err)
 	assert.Contains(t, msg, msgItemsDeleted)
-	time.Sleep(1 * time.Second)
 }
 
 func TestAddDeleteTag(t *testing.T) {
@@ -25,26 +22,22 @@ func TestAddDeleteTag(t *testing.T) {
 	msg, _, err = startCLI([]string{"sncli", "delete", "tag", "--title", "testTag"})
 	assert.NoError(t, err)
 	assert.Equal(t, fmt.Sprintf("1 %s", msgDeleted), msg)
-	time.Sleep(1 * time.Second)
 }
 
 func TestAddTagErrorMissingTitle(t *testing.T) {
 	_, _, err := startCLI([]string{"sncli", "add", "tag", "--no-stdout"})
 	assert.Error(t, err, "error should be returned if title is unspecified")
-	time.Sleep(1 * time.Second)
 }
 
 func TestDeleteTagMissingUUID(t *testing.T) {
 	msg, _, err := startCLI([]string{"sncli", "delete", "tag", "--uuid", "3a277f8d-f247-4236-a803-80795123135g"})
 	assert.NoError(t, err)
 	assert.Equal(t, msg, fmt.Sprintf("0 %s", msgDeleted))
-	time.Sleep(1 * time.Second)
 }
 
 func TestDeleteTagErrorMissingTitle(t *testing.T) {
 	_, _, err := startCLI([]string{"sncli", "delete", "tag", "--no-stdout"})
 	assert.Error(t, err, "error should be returned if title is unspecified")
-	time.Sleep(1 * time.Second)
 }
 
 //func TestAddDeleteNote(t *testing.T) {
@@ -60,13 +53,11 @@ func TestDeleteTagErrorMissingTitle(t *testing.T) {
 func TestAddNoteErrorMissingTitle(t *testing.T) {
 	_, _, err := startCLI([]string{"sncli", "add", "note", "--no-stdout"})
 	assert.Error(t, err)
-	time.Sleep(1 * time.Second)
 }
 
 func TestDeleteNoteErrorMissingTitle(t *testing.T) {
 	_, _, err := startCLI([]string{"sncli", "delete", "note", "--no-stdout"})
 	assert.Error(t, err, "error should be returned if title is unspecified")
-	time.Sleep(1 * time.Second)
 }
 
 func TestTagNotesByTextWithNewTags(t *testing.T) {
