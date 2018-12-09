@@ -44,7 +44,13 @@ func TestWipeWith50(t *testing.T) {
 			fmt.Printf("%d %s %s %t\n", i, n.UUID, "-------", n.Deleted)
 
 		} else {
-			fmt.Printf("%d %s %s %t\n", i, n.UUID, n.Content.GetTitle()[:50], n.Deleted)
+			if len(n.Content.GetTitle()) >= 50 {
+				fmt.Printf("%d %s %s %t\n", i, n.UUID, n.Content.GetTitle()[:50], n.Deleted)
+
+			} else {
+				fmt.Printf("%d %s %s %t\n", i, n.UUID, n.Content.GetTitle(), n.Deleted)
+
+			}
 
 		}
 	}
