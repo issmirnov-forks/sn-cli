@@ -106,7 +106,7 @@ func TestAddDeleteNoteByUUID(t *testing.T) {
 	}
 	var noDeleted int
 	noDeleted, err = deleteNoteConfig.Run()
-	time.Sleep(1 * time.Second)
+	time.Sleep(5 * time.Second)
 	assert.Equal(t, noDeleted, 1)
 	assert.NoError(t, err, err)
 
