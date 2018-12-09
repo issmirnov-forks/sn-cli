@@ -76,7 +76,7 @@ func TestAddDeleteNoteByUUID(t *testing.T) {
 	}
 	err := addNoteConfig.Run()
 	assert.NoError(t, err, err)
-	time.Sleep(1 * time.Second)
+	time.Sleep(5 * time.Second)
 
 	// get new note
 	filter := gosn.Filter{
@@ -95,7 +95,7 @@ func TestAddDeleteNoteByUUID(t *testing.T) {
 	}
 	var preRes, postRes gosn.GetItemsOutput
 	preRes, err = gnc.Run()
-	time.Sleep(1 * time.Second)
+	time.Sleep(2 * time.Second)
 
 	assert.NoError(t, err, err)
 
