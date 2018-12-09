@@ -47,15 +47,15 @@ func TestDeleteTagErrorMissingTitle(t *testing.T) {
 	time.Sleep(1 * time.Second)
 }
 
-func TestAddDeleteNote(t *testing.T) {
-	msg, _, err := startCLI([]string{"sncli", "add", "note", "--title", "testNote", "--text", "some example text"})
-	assert.NoError(t, err)
-	assert.Equal(t, msg, msgAddSuccess)
-	msg, _, err = startCLI([]string{"sncli", "delete", "note", "--title", "testNote"})
-	assert.NoError(t, err)
-	assert.Equal(t, msg, fmt.Sprintf("1 %s", msgDeleted))
-	time.Sleep(1 * time.Second)
-}
+//func TestAddDeleteNote(t *testing.T) {
+//	msg, _, err := startCLI([]string{"sncli", "add", "note", "--title", "testNote", "--text", "some example text"})
+//	assert.NoError(t, err)
+//	assert.Equal(t, msg, msgAddSuccess)
+//	msg, _, err = startCLI([]string{"sncli", "delete", "note", "--title", "testNote"})
+//	assert.NoError(t, err)
+//	assert.Equal(t, msg, fmt.Sprintf("1 %s", msgDeleted))
+//	time.Sleep(1 * time.Second)
+//}
 
 func TestAddNoteErrorMissingTitle(t *testing.T) {
 	_, _, err := startCLI([]string{"sncli", "add", "note", "--no-stdout"})
