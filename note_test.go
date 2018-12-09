@@ -18,6 +18,7 @@ func TestMain(m *testing.M) {
 }
 
 func TestWipeWith50(t *testing.T) {
+	cleanUp(&testSession)
 	defer cleanUp(&testSession)
 
 	numNotes := 50
