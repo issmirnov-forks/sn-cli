@@ -39,7 +39,9 @@ func TestWipeWith50(t *testing.T) {
 	}
 	var gno gosn.GetItemsOutput
 	gno, err = gosn.GetItems(gni)
-
+	for _, n := range gno.Items {
+		fmt.Printf("%s %s %t\n", n.UUID, n.Content.GetTitle(), n.Deleted)
+	}
 	assert.Equal(t, 50, len(gno.Items))
 	wipeConfig := WipeConfig{
 		Session: testSession,
