@@ -111,9 +111,6 @@ type AddTagConfig struct {
 type GetTagConfig struct {
 	Session gosn.Session
 	Filters gosn.ItemFilters
-	//TagTitles []string
-	//TagUUIDs  []string
-	//Regex     string
 	Output string
 	Debug  bool
 }
