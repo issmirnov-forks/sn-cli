@@ -867,7 +867,54 @@ func startCLI(args []string) (msg string, display bool, err error) {
 				},
 			},
 		},
+		{
+			Name:  "export",
+			Usage: "export data",
+			Flags: []cli.Flag{
+				cli.BoolTFlag{
+					Name:  "encrypted (default: true)",
+					Usage: "number of tags",
+				},
+				cli.StringFlag{
+					Name:   "format",
+					Usage:  "hidden whilst gob is the only supported format",
+					Value:  "gob",
+					Hidden: true,
+				},
+				cli.StringFlag{
+					Name:  "output (default: current directory)",
+					Usage: "output path",
+				},
+			},
+			Action: func(c *cli.Context) error {
+				outputPath := strings.TrimSpace(c.String("output"))
+				if outputPath == "" {
+					currDir, err := os.Getwd()
+					if err != nil {
+						return err
+					}
+					timeStamp := time.Now().UTC().Format("20060102150405")
+					filePath := fmt.Sprintf("standard_notes_export_%s.gob", timeStamp)
+					outputPath = currDir + string(os.PathSeparator) + filePath
 
+				}
+				settings := getSettings()
+				var session gosn.Session
+				session, _, err = getSession(c.GlobalString("server"), settings, c.GlobalBool("save-session"))
+				if err != nil {
+					return err
+				}
+
+				appExportConfig := sncli.ExportConfig{
+					Session: session,
+					Output:  outputPath,
+					Debug:   c.GlobalBool("debug"),
+				}
+				err = appExportConfig.Run()
+				return err
+
+			},
+		},
 		{
 			Name:  "register",
 			Usage: "register a new user",
