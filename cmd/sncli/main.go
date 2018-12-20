@@ -59,38 +59,6 @@ func main() {
 	os.Exit(0)
 }
 
-func itemRefsToYaml(irs []gosn.ItemReference) []sncli.ItemReferenceYAML {
-	var iRefs []sncli.ItemReferenceYAML
-	for _, ref := range irs {
-		iRef := sncli.ItemReferenceYAML{
-			UUID:        ref.UUID,
-			ContentType: ref.ContentType,
-		}
-		iRefs = append(iRefs, iRef)
-	}
-	return iRefs
-}
-
-func itemRefsToJSON(irs []gosn.ItemReference) []sncli.ItemReferenceJSON {
-	var iRefs []sncli.ItemReferenceJSON
-	for _, ref := range irs {
-		iRef := sncli.ItemReferenceJSON{
-			UUID:        ref.UUID,
-			ContentType: ref.ContentType,
-		}
-		iRefs = append(iRefs, iRef)
-	}
-	return iRefs
-}
-
-func commaSplit(input string) []string {
-	o := strings.Split(input, ",")
-	if len(o) == 1 && len(o[0]) == 0 {
-		return nil
-	}
-	return o
-}
-
 func startCLI(args []string) (msg string, display bool, err error) {
 	viper.SetEnvPrefix("sn")
 	err = viper.BindEnv("email")
@@ -1226,4 +1194,36 @@ func getSession(server string, settings *Settings, cache bool) (gosn.Session, st
 	}
 
 	return sess, email, err
+}
+
+func itemRefsToYaml(irs []gosn.ItemReference) []sncli.ItemReferenceYAML {
+	var iRefs []sncli.ItemReferenceYAML
+	for _, ref := range irs {
+		iRef := sncli.ItemReferenceYAML{
+			UUID:        ref.UUID,
+			ContentType: ref.ContentType,
+		}
+		iRefs = append(iRefs, iRef)
+	}
+	return iRefs
+}
+
+func itemRefsToJSON(irs []gosn.ItemReference) []sncli.ItemReferenceJSON {
+	var iRefs []sncli.ItemReferenceJSON
+	for _, ref := range irs {
+		iRef := sncli.ItemReferenceJSON{
+			UUID:        ref.UUID,
+			ContentType: ref.ContentType,
+		}
+		iRefs = append(iRefs, iRef)
+	}
+	return iRefs
+}
+
+func commaSplit(input string) []string {
+	o := strings.Split(input, ",")
+	if len(o) == 1 && len(o[0]) == 0 {
+		return nil
+	}
+	return o
 }
