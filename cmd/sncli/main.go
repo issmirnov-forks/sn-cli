@@ -597,7 +597,7 @@ func startCLI(args []string) (msg string, display bool, err error) {
 							Output:  output,
 							Debug:   c.GlobalBool("debug"),
 						}
-						var rawTags gosn.GetItemsOutput
+						var rawTags gosn.Items
 						rawTags, err = appGetTagConfig.Run()
 						if err != nil {
 							return err
@@ -606,7 +606,7 @@ func startCLI(args []string) (msg string, display bool, err error) {
 						var tagsYAML []sncli.TagYAML
 						var tagsJSON []sncli.TagJSON
 						var numResults int
-						for _, rt := range rawTags.Items {
+						for _, rt := range rawTags {
 							numResults++
 							if !count && sncli.StringInSlice(output, yamlAbbrevs, false) {
 								tagContentOrgStandardNotesSNDetailYAML := sncli.OrgStandardNotesSNDetailYAML{
@@ -785,7 +785,7 @@ func startCLI(args []string) (msg string, display bool, err error) {
 							Filters: getNotesIF,
 							Debug:   c.GlobalBool("debug"),
 						}
-						var rawNotes gosn.GetItemsOutput
+						var rawNotes gosn.Items
 						rawNotes, err = getNoteConfig.Run()
 						if err != nil {
 							return err
@@ -793,7 +793,7 @@ func startCLI(args []string) (msg string, display bool, err error) {
 						var numResults int
 						var notesYAML []sncli.NoteYAML
 						var notesJSON []sncli.NoteJSON
-						for _, rt := range rawNotes.Items {
+						for _, rt := range rawNotes {
 							numResults++
 							if !count && sncli.StringInSlice(output, yamlAbbrevs, false) {
 								noteContentOrgStandardNotesSNDetailYAML := sncli.OrgStandardNotesSNDetailYAML{
