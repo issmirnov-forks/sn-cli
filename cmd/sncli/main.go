@@ -487,7 +487,7 @@ func startCLI(args []string) (msg string, display bool, err error) {
 			Subcommands: []cli.Command{
 				{
 					Name:    "settings",
-					Aliases: []string{"settings"},
+					Aliases: []string{"setting"},
 					Usage:   "get settings",
 					Flags: []cli.Flag{
 						cli.BoolFlag{
